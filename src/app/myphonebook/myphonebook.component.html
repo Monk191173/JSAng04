@@ -1,0 +1,45 @@
+<div class="container">
+    <h1>My phone book!</h1>
+    <hr>
+
+    <div class="addBlock">
+        <input type="text" [(ngModel)]="searchName" maxlength="60" placeholder="search text goes here">
+        <input type="button" value="Add phone" (click)="addContact()">
+    </div>
+
+    <div [ngClass]="addNo">
+        <div class="inputData">
+            <span class="tool" (click)="close()">X</span>
+            <label>First Name</label>
+            <input type="text" [(ngModel)]="firstName">
+
+            <label>Last Name</label>
+            <input type="text" [(ngModel)]="lastName">
+
+            <label>Phone Number</label>
+            <input type="text" [(ngModel)]="number">
+
+            <input type="button" value="Save" (click)="addAbon(firstName,lastName,number)">
+
+        </div>
+    </div>
+
+    <div [ngClass]="'contact-list'">
+        <table [ngClass]="'contact-list-table'">
+            <th>#</th>
+            <th (click)="fClick('First Name')" #thf>First Name</th>
+            <th (click)="fClick('Last Name')" #thl>Last Name</th>
+            <th (click)="fClick('Phone Number')" #thn>Phone Number</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <tr *ngFor="let mas of masContacts  | sort : col : asd | search:searchName;index as i">
+                <td>{{i+1}}</td>
+                <td>{{mas.firstName}}</td>
+                <td>{{mas.lastName}}</td>
+                <td>{{mas.number}}</td>
+                <td><input [ngClass]="'edit'" type="button" value="Edit" id="{{i}}e" (click)="editContact(i)"></td>
+                <td><input [ngClass]="'delete'" type="button" value="Delete" id="{{i}}d" (click)="deleteContact(i)">
+                </td>
+            </tr>
+        </table>
+    </div>
